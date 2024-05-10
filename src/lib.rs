@@ -1,3 +1,14 @@
+//! Farts - port of fart.js
+//! Example:
+//! ```
+//! use farts::prelude::*;
+//!
+//! fn main() -> Result<(), {
+//!     // you can discover more assets in farts::fart module
+//!     farts::play(farts::fart::TOOT).unwrap();
+//! }
+//! ```
+
 use std::future::Future;
 use std::io::Cursor;
 
@@ -9,7 +20,9 @@ use rust_embed::RustEmbed;
 #[folder = "assets/farts/"]
 struct FartAssets;
 
+/// Different types of fartes
 pub mod fart {
+    /// Fart type which stores path to the asset
     pub type Fart = &'static str;
 
     pub const TOOT: Fart = "fart1.wav";
@@ -28,6 +41,7 @@ pub mod fart {
     pub const FARTPOINT1: Fart = "fart14.wav";
 }
 
+/// Stores errors which can occure while playing fart sound
 #[derive(Debug)]
 pub enum FartingError {
     IO(std::io::Error),
@@ -35,6 +49,8 @@ pub enum FartingError {
     StreamingError(rodio::StreamError),
     PlayingError(rodio::PlayError),
 }
+
+impl std::Error for FartingError,
 
 /**
 Play a fart sound.
@@ -69,12 +85,7 @@ pub fn play(fart: fart::Fart) -> Result<(), FartingError> {
     Ok(())
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn it_works() {
-        play(fart::TOOT).unwrap();
-    }
+pub mod prelude {
+    pub use crate::fart::*;
+    pub use crate;
 }
