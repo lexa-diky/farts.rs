@@ -36,11 +36,24 @@ pub enum FartingError {
     PlayingError(rodio::PlayError),
 }
 
+/**
+Play a fart sound.
+
+###### Arguments:
+- `fart` - The fart sound to play.
+You can discover the available fart sounds by looking in the `farts::fart` module.
+
+###### Example
+``` rust
+farts::play(farts::fart::WINDY)
+    .unwrap();
+```
+ */
 pub fn play(fart: fart::Fart) -> Result<(), FartingError> {
     let asset = FartAssets::get(fart).unwrap();
 
     let cursor = Cursor::new(asset.data);
-    let source =  Decoder::new(cursor)
+    let source = Decoder::new(cursor)
         .map_err(|e| FartingError::DecodingError(e))?;
 
     let (_stream, stream_handle) = OutputStream::try_default()
