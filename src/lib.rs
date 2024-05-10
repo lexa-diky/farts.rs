@@ -9,7 +9,7 @@ use rust_embed::RustEmbed;
 #[folder = "assets/farts/"]
 struct FartAssets;
 
-mod fart {
+pub mod fart {
     pub type Fart = &'static str;
 
     pub const TOOT: Fart = "fart1.wav";
