@@ -2,8 +2,14 @@
 name = "farts"
 version = "0.1.0"
 edition = "2021"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+license = "Apache-2.0"
+repository = "https://github.com/lexa-diky/farts.rs"
+readme = "README.md"
+documentation = "https://github.com/lexa-diky/farts.rs"
+homepage = "https://github.com/lexa-diky/farts.rs"
+description = "Port of fart.js library in Rust"
+keywords = ["sound", "fart", "multimedia", "audio"]
+categories = ["multimedia"]
 
 [dependencies]
 rodio = "0.18.0"
