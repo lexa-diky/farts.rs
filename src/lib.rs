@@ -29,7 +29,7 @@ pub mod fart {
 }
 
 #[derive(Debug)]
-pub(crate) enum FartingError {
+pub enum FartingError {
     IO(std::io::Error),
     DecodingError(rodio::decoder::DecoderError),
     StreamingError(rodio::StreamError),
