@@ -18,10 +18,14 @@ cargo add farts
 ## Usage
 
 ```rust
-use farts;
+use farts::prelude::*;
 
-fn main() {
+fn main() -> Result<(), Box<dyn std::error::Error>> {
     // you can discover more assets in farts::fart module
-    farts::play(farts::fart::TOOT).unwrap();
+    farts::play(TOOT)?;
+
+    Ok(())
 }
 ```
+
+Discover more examples in the `examples` folder
