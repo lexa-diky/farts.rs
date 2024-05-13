@@ -1,15 +1,27 @@
-use std::future::Future;
-use std::io::Cursor;
+//! Farts - port of fart.js
+//! Example:
+//! 
+//! ```
+//! use farts::prelude::*;
+//!
+//! fn main() -> Result<(), Box<dyn std::error::Error>> {
+//!     // you can discover more assets in farts::fart module
+//!     farts::play(TOOT)?;
+//!     Ok(())
+//! }
+//! ```
+use std::{fmt::Display, io::Cursor};
 
 use rodio::{Decoder, OutputStream, Sink};
-use rodio::source::Source;
 use rust_embed::RustEmbed;
 
 #[derive(RustEmbed)]
 #[folder = "assets/farts/"]
 struct FartAssets;
 
+/// Different types of fartes
 pub mod fart {
+    /// Fart type which stores path to the asset
     pub type Fart = &'static str;
 
     pub const TOOT: Fart = "fart1.wav";
@@ -28,6 +40,7 @@ pub mod fart {
     pub const FARTPOINT1: Fart = "fart14.wav";
 }
 
+/// Stores errors which can occure while playing fart sound
 #[derive(Debug)]
 pub enum FartingError {
     IO(std::io::Error),
@@ -35,6 +48,21 @@ pub enum FartingError {
     StreamingError(rodio::StreamError),
     PlayingError(rodio::PlayError),
 }
+
+impl Display for FartingError {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        let msg = match self {
+            FartingError::IO(a) => format!("{}", a),
+            FartingError::DecodingError(a) => format!("{}", a),
+            FartingError::StreamingError(a) => format!("{}", a),
+            FartingError::PlayingError(a) => format!("{}", a),
+        };
+
+        write!(f, "{}", msg)
+    }
+}
+
+impl std::error::Error for FartingError {}
 
 /**
 Play a fart sound.
@@ -69,12 +97,7 @@ pub fn play(fart: fart::Fart) -> Result<(), FartingError> {
     Ok(())
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-
-    #[test]
-    fn it_works() {
-        play(fart::TOOT).unwrap();
-    }
+pub mod prelude {
+    pub use crate::fart::*;
+    pub use crate as farts;
 }
