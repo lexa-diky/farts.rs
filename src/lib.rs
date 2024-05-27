@@ -1,6 +1,6 @@
 //! Farts - port of fart.js
 //! Example:
-//! 
+//!
 //! ```
 //! use farts::prelude::*;
 //!
@@ -84,8 +84,8 @@ pub fn play(fart: fart::Fart) -> Result<(), FartingError> {
     let source = Decoder::new(cursor)
         .map_err(|e| FartingError::DecodingError(e))?;
 
-    let (_stream, stream_handle) = OutputStream::try_default()
-        .map_err(|e| FartingError::StreamingError(e))?;
+    let (_stream, stream_handle) =
+        OutputStream::try_default().map_err(|e| FartingError::StreamingError(e))?;
 
     let sink = Sink::try_new(&stream_handle)
         .map_err(|e| FartingError::PlayingError(e))?;
@@ -98,6 +98,6 @@ pub fn play(fart: fart::Fart) -> Result<(), FartingError> {
 }
 
 pub mod prelude {
-    pub use crate::fart::*;
     pub use crate as farts;
+    pub use crate::fart::*;
 }
