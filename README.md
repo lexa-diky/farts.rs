@@ -8,6 +8,7 @@
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/lexa-diky/****farts.rs****/build?branch=main&logo=github)
 
 > Port of [fart.js](https://github.com/74656c/fart.js) library in Rust. Same, but better, a.k.a. written in Rust.
+> Blasting performance. ~~No dependencies~~. No unsafe code. No memory leaks. Just farts.
 
 # `farts.rs` - Empowering Enterprise Auditory Solutions
 
